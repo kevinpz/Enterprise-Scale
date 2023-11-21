@@ -134,6 +134,10 @@
                                 "allowedValues": [
                                     {
                                         "label": "English",
+                                        "value": "English"
+                                    },
+                                    {
+                                        "label": "Francais",
                                         "value": "Francais"
                                     }
                                 ]
