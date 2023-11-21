@@ -926,18 +926,19 @@
             "keyVault": "kv"
         },
 
+        "mgPrefix":  "[concat(variables('resourcesPrefix').managementGroup, '-', parameters('enterpriseScaleCompanyPrefix'))]",
         // Declaring the prescriptive management group structure that will be used in the scope construction
         "mgmtGroups": {
-            "eslzRoot": "[concat(variables('resourcesPrefix').managementGroup, '-', parameters('enterpriseScaleCompanyPrefix'))]",
-            "platform": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').platform[parameters('resourcesLanguage')])]",
-            "management": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').management[parameters('resourcesLanguage')])]",
-            "connectivity": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').connectivity[parameters('resourcesLanguage')])]",
-            "identity": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').identity[parameters('resourcesLanguage')])]",
-            "lzs": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').lzs[parameters('resourcesLanguage')])]",
-            "corp": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').corp[parameters('resourcesLanguage')])]",
-            "online": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').online[parameters('resourcesLanguage')])]",
-            "decommissioned": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').decommissioned[parameters('resourcesLanguage')])]",
-            "sandboxes": "[concat(variables('mgmtGroups').eslzRoot, '-', variables('localName').sandboxes[parameters('resourcesLanguage')])]"
+            "eslzRoot": "[variables('mgPrefix')]",
+            "platform": "[concat(variables('mgPrefix'), '-', variables('localName').platform[parameters('resourcesLanguage')])]",
+            "management": "[concat(variables('mgPrefix'), '-', variables('localName').management[parameters('resourcesLanguage')])]",
+            "connectivity": "[concat(variables('mgPrefix'), '-', variables('localName').connectivity[parameters('resourcesLanguage')])]",
+            "identity": "[concat(variables('mgPrefix'), '-', variables('localName').identity[parameters('resourcesLanguage')])]",
+            "lzs": "[concat(variables('mgPrefix'), '-', variables('localName').lzs[parameters('resourcesLanguage')])]",
+            "corp": "[concat(variables('mgPrefix'), '-', variables('localName').corp[parameters('resourcesLanguage')])]",
+            "online": "[concat(variables('mgPrefix'), '-', variables('localName').online[parameters('resourcesLanguage')])]",
+            "decommissioned": "[concat(variables('mgPrefix'), '-', variables('localName').decommissioned[parameters('resourcesLanguage')])]",
+            "sandboxes": "[concat(variables('mgPrefix'), '-', variables('localName').sandboxes[parameters('resourcesLanguage')])]"
         },
         "copy": [
             {
