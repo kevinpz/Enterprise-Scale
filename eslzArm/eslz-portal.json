@@ -117,7 +117,7 @@
                             "type": "Microsoft.Common.TextBox",
                             "label": "Resource prefix (Root ID)",
                             "toolTip": "Provide a resource prefix (max 10 characters, unique at tenant-scope). This will be used for the Management Group hierarchy and other resources created as part of this deployment.",
-                            "defaultValue": "ChangeMe",
+                            "defaultValue": null,
                             "constraints": {
                                 "required": true,
                                 "regex": "^[a-z0-9A-Z-]{1,10}$",
@@ -373,7 +373,7 @@
                             "label": "Region for the Log Analytics Workspace",
                             "filter": true,
                             "toolTip": "Select the target region for the Log Analytics Workspace",
-                            "defaultValue": "canadacentral",
+                            "defaultValue": "Canada Central",
                             "constraints": {
                                 "allowedValues": "[map(steps('basics').getLocations.value,(item) => parse(concat('{\"label\":\"',item.displayName,'\",\"value\":\"',item.name,'\"}')))]",
                                 "required": true
