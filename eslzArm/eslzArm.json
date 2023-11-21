@@ -1078,6 +1078,11 @@
             "identityVnet": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-vnet-', parameters('connectivityLocation'))]",
             "lzVnet": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-vnet-', parameters('connectivityLocation'))]"
         },
+        // Declaring deterministic names for lz resources that will be created
+        "lzResourceNames": {
+            "identityVnetName": "identity",
+            "corpVnetName": "corp"
+        },
         // Declaring deterministic resourceId's for platform resources that will be created
         "singleVsDedicatedMgmtSub": "[if(empty(parameters('managementSubscriptionId')), parameters('singlePlatformSubscriptionId'), parameters('managementSubscriptionId'))]",
         "singleVsDedicatedConnectivitySub": "[if(empty(parameters('connectivitySubscriptionId')), parameters('singlePlatformSubscriptionId'), parameters('connectivitySubscriptionId'))]",
@@ -1864,7 +1869,7 @@
                         "value": "[variables('platformRgNames').identityVnetRg]"
                     },
                     "vNetName": {
-                        "value": "[take(concat(variables('platformResourceNames').identityVnet, '-', uniqueString(parameters('identitySubscriptionId'))), 64)]"
+                        "value": "[take(concat(variables('platformResourceNames').identityVnet, '-',variables('lzResourceNames').identityVnetName), 64)]"
                     },
                     "vNetLocation": {
                         "value": "[parameters('connectivityLocation')]"
@@ -1906,7 +1911,7 @@
                         "value": "[variables('platformRgNames').identityVnetRg]"
                     },
                     "vNetName": {
-                        "value": "[take(concat(variables('platformResourceNames').identityVnet, '-', uniqueString(parameters('identitySubscriptionId'))), 64)]"
+                        "value": "[take(concat(variables('platformResourceNames').identityVnet, '-',variables('lzResourceNames').identityVnetName), 64)]"
                     },
                     "vNetLocation": {
                         "value": "[parameters('connectivityLocation')]"
@@ -2053,7 +2058,7 @@
                         "value": "[variables('platformRgNames').lzVnetRg]"
                     },
                     "vNetName": {
-                        "value": "[take(concat(variables('platformResourceNames').lzVnet, '-', parameters('corpConnectedLzSubscriptionId')[copyIndex()].subs), 64)]"
+                        "value": "[take(concat(variables('platformResourceNames').lzVnet, '-', variables('lzResourceNames').corpVnetName), 64)]"
                     },
                     "vNetLocation": {
                         "value": "[parameters('connectivityLocation')]"
