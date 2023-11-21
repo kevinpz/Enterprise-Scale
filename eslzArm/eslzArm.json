@@ -1404,7 +1404,7 @@
                         "value": "[variables('platformResourceNames').automationAccount]"
                     },
                     "automationRegion": {
-                        "value": "[deployment().location]"
+                        "value": "[parameters('regionLAW')]"
                     },
                     "retentionInDays": {
                         "value": "[parameters('retentionInDays')]"
