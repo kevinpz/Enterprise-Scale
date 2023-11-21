@@ -360,6 +360,19 @@
                             "visible": true
                         },
                         {
+                            "name": "regionLAW",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Region for the Log Analytics Workspace",
+                            "filter": true,
+                            "toolTip": "Select the target region for the Log Analytics Workspace",
+                            "defaultValue": "[steps('basics').resourceScope.location.displayName]",
+                            "constraints": {
+                                "allowedValues": "[map(steps('basics').getLocations.value,(item) => parse(concat('{\"label\":\"',item.displayName,'\",\"value\":\"',item.name,'\"}')))]",
+                                "required": true
+                            },
+                            "visible": "[equals(steps('management').enableLogAnalytics,'Yes')]"
+                        },
+                        {
                             "name": "retentionInDays",
                             "type": "Microsoft.Common.Slider",
                             "min": 30,
@@ -3443,6 +3456,7 @@
                 "enforceKvGuardrailsPlat": "[steps('management').esPlatformMgmtGroup.enforceKvGuardrailsPlat]",
                 "enableLogAnalytics": "[steps('management').enableLogAnalytics]",
                 "retentionInDays": "[string(steps('management').retentionInDays)]",
+                "regionLAW": "[string(steps('management').regionLAW)]",
                 "managementSubscriptionId": "[steps('management').esMgmtSubSection.esMgmtSub]",
                 "enableAgentHealth": "[steps('management').enableAgentHealth]",
                 "enableChangeTracking": "[steps('management').enableChangeTracking]",
