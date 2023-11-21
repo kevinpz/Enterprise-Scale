@@ -373,7 +373,7 @@
                             "label": "Region for the Log Analytics Workspace",
                             "filter": true,
                             "toolTip": "Select the target region for the Log Analytics Workspace",
-                            "defaultValue": "canadacentral",
+                            "defaultValue": "Canada Central",
                             "constraints": {
                                 "allowedValues": "[map(steps('basics').getLocations.value,(item) => parse(concat('{\"label\":\"',item.displayName,'\",\"value\":\"',item.name,'\"}')))]",
                                 "required": true
