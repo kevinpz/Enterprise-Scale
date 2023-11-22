@@ -940,7 +940,9 @@
             "automationAccount": "aa",
             "firewall": "fw",
             "firewallpolicy": "fwp",
-            "publicip": "pip"
+            "publicip": "pip",
+            "virtualNetworkGateway": "vgw",
+            "locallNetworkGateway": "lgw"
         },
 
         "mgPrefix":  "[concat(variables('resourcesPrefix').managementGroup, '-', parameters('enterpriseScaleCompanyPrefix'))]",

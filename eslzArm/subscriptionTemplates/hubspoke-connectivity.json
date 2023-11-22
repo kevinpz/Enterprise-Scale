@@ -181,14 +181,15 @@
         }
     },
     "variables": {
-        "vpngwname": "[concat(parameters('topLevelManagementGroupPrefix'), '-vpngw-', parameters('location'))]",
+        "vpngwname": "[concat(parameters('resourcesPrefix').virtualNetworkGateway, '-vpn-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
+        "vpnlgwname": "[concat(parameters('resourcesPrefix').locallNetworkGateway, '-vpn-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
+        "azVpnGwIpName": "[concat(parameters('resourcesPrefix').publicip, '-', parameters('localName').firewall[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "erGwName": "[concat(parameters('topLevelManagementGroupPrefix'), '-ergw-', parameters('location'))]",
-        "rgName": "[concat(parameters('resourcesPrefix').resourceGroup, '-', parameters('localName').network[parameters('resourcesLanguage')], '-', parameters('localName').management[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
+        "rgName": "[concat(parameters('resourcesPrefix').resourceGroup, '-', parameters('localName').network[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "azFwName": "[concat(parameters('resourcesPrefix').firewall, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "azFwPolicyName": "[concat(parameters('resourcesPrefix').firewallpolicy, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "azFwIpName": "[concat(parameters('resourcesPrefix').publicip, '-', parameters('localName').firewall[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "hubName": "[concat(parameters('resourcesPrefix').virtualNetwork, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
-        "azVpnGwIpName": "[concat(variables('vpngwname'), '-pip')]",
         "azVpnGwAAIpName": "[concat(variables('vpngwname'), '-pip-002')]",
         "azVpnGwSubnetId": "[concat('/subscriptions/', parameters('connectivitySubscriptionId'), '/resourceGroups/', variables('rgName'),'/providers/Microsoft.Network/virtualNetworks/', variables('hubname'), '/subnets/GatewaySubnet')]",
         "azErGwIpName": "[concat(variables('erGwName'), '-pip')]",
