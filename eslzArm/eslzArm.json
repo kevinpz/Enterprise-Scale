@@ -1330,8 +1330,8 @@
                     "uri": "[variables('deploymentUris').managementGroups]"
                 },
                 "parameters": {
-                    "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                    "mgmtGroups": {
+                        "value": "[variables('mgmtGroups')]"
                     }
                 }
             }

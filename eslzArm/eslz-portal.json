@@ -134,11 +134,11 @@
                                 "allowedValues": [
                                     {
                                         "label": "English",
-                                        "value": "English"
+                                        "value": "english"
                                     },
                                     {
                                         "label": "Francais",
-                                        "value": "Francais"
+                                        "value": "francais"
                                     }
                                 ]
                             },
