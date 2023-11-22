@@ -1971,70 +1971,71 @@
         //         }
         //     }
         // },
-        // {
-        //     // Creating resource group for Private DNS Zones
-        //     "condition": "[and(equals(parameters('enablePrivateDnsZones'), 'Yes'), not(empty(parameters('connectivitySubscriptionId'))))]",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2020-10-01",
-        //     "name": "[variables('deploymentNames').privateDnsZoneRgDeploymentName]",
-        //     "subscriptionId": "[parameters('connectivitySubscriptionId')]",
-        //     "location": "[deployment().location]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').connectivitySubscriptionPlacement)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]"
-        //     ],
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "templateLink": {
-        //             "contentVersion": "1.0.0.0",
-        //             "uri": "[variables('deploymentUris').resourceGroup]"
-        //         },
-        //         "parameters": {
-        //             "rgName": {
-        //                 "value": "[variables('platformRgNames').privateDnsRg]"
-        //             },
-        //             "location": {
-        //                 "value": "[parameters('connectivityLocation')]"
-        //             }
-        //         }
-        //     }
-        // },
-        // {
-        //     // Creating Private DNS Zones into the connectivity subscription
-        //     "condition": "[and(equals(parameters('enablePrivateDnsZones'), 'Yes'), not(empty(parameters('connectivitySubscriptionId'))))]",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2020-10-01",
-        //     "name": "[concat(variables('deploymentNames').privateDnsZonesDeploymentName, copyIndex())]",
-        //     "subscriptionId": "[parameters('connectivitySubscriptionId')]",
-        //     "resourceGroup": "[variables('platformRgNames').privateDnsRg]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').privateDnsZoneRgDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]"
-        //     ],
-        //     "copy": {
-        //         "name": "dnsZones",
-        //         "count": "[length(variables('privateDnsZonesMerge'))]"
-        //     },
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "templateLink": {
-        //             "contentVersion": "1.0.0.0",
-        //             "uri": "[variables('deploymentUris').privateDnsZones]"
-        //         },
-        //         "parameters": {
-        //             "privateDnsZoneName": {
-        //                 "value": "[concat(variables('privateDnsZonesMerge')[copyIndex()])]"
-        //             },
-        //             "connectivityHubResourceId": {
-        //                 "value": "[variables('platformResourceIds').vNetHubResourceId]"
-        //             }
-        //         }
-        //     }
-        // },
+        {
+            // Creating resource group for Private DNS Zones
+            "condition": "[and(equals(parameters('enablePrivateDnsZones'), 'Yes'), not(empty(parameters('connectivitySubscriptionId'))))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "name": "[variables('deploymentNames').privateDnsZoneRgDeploymentName]",
+            "subscriptionId": "[parameters('connectivitySubscriptionId')]",
+            "location": "[deployment().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').connectivitySubscriptionPlacement)]",
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]"
+               // "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
+               // "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').resourceGroup]"
+                },
+                "parameters": {
+                    "rgName": {
+                        "value": "[variables('platformRgNames').connectivityPrivdnsRg]"
+                    },
+                    "location": {
+                        "value": "[parameters('connectivityLocation')]"
+                    }
+                }
+            }
+        },
+        {
+            // Creating Private DNS Zones into the connectivity subscription
+            "condition": "[and(equals(parameters('enablePrivateDnsZones'), 'Yes'), not(empty(parameters('connectivitySubscriptionId'))))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "name": "[concat(variables('deploymentNames').privateDnsZonesDeploymentName, copyIndex())]",
+            "subscriptionId": "[parameters('connectivitySubscriptionId')]",
+            "resourceGroup": "[variables('platformRgNames').connectivityPrivdnsRg]",
+            "location": "[deployment().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').privateDnsZoneRgDeploymentName)]",
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]"
+                //"[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
+                //"[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]"
+            ],
+            "copy": {
+                "name": "dnsZones",
+                "count": "[length(variables('privateDnsZonesMerge'))]"
+            },
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').privateDnsZones]"
+                },
+                "parameters": {
+                    "privateDnsZoneName": {
+                        "value": "[concat(variables('privateDnsZonesMerge')[copyIndex()])]"
+                    },
+                    "connectivityHubResourceId": {
+                        "value": "[variables('platformResourceIds').vNetHubResourceId]"
+                    }
+                }
+            }
+        },
 
 
 
