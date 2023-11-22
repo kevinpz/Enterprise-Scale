@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "mgmtGroups": {
-            "type": "string",
+            "type": "object",
             "metadata": {
                 "description": "List of MGs."
             }
