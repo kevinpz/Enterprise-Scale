@@ -1298,8 +1298,8 @@
                             "name": "enableDdoSIpFirewall",
                             "type": "Microsoft.Common.OptionsGroup",
                             "label": "Enable DDoS for the firewall IP",
-                            "defaultValue": "Yes (recommended)",
-                            "visible": "[and(not(equals(steps('connectivity').enableHub, 'No')), equals(steps('connectivity').enableDdoS, 'No')]",
+                            "defaultValue": "No",
+                            "visible": "[and(not(equals(steps('connectivity').enableHub, 'No')), equals(steps('connectivity').enableDdoS, 'No'))]",
                             "toolTip": "If 'Yes' is selected when also adding a connectivity subscription, DDoS Network Protection will be enabled.",
                             "constraints": {
                                 "allowedValues": [
