@@ -2009,7 +2009,6 @@
             "name": "[concat(variables('deploymentNames').privateDnsZonesDeploymentName, copyIndex())]",
             "subscriptionId": "[parameters('connectivitySubscriptionId')]",
             "resourceGroup": "[variables('platformRgNames').connectivityPrivdnsRg]",
-            "location": "[deployment().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').privateDnsZoneRgDeploymentName)]",
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]"
