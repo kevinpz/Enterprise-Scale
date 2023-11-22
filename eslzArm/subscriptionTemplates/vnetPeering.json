@@ -190,6 +190,9 @@
                     "zone": {
                       "value": "[parameters('zone')]"
                     },
+                    "vNetLocation": {
+                      "value": "[parameters('vNetLocation')]"
+                    },
                     "localName": {
                       "value": "[parameters('localName')]"
                     },
@@ -219,6 +222,10 @@
                         "type": "String",
                         "defaultValue": false
                       },
+                      "vNetLocation": {
+                        "type": "String",
+                        "defaultValue": false
+                      },
                       "localName": {
                           "type": "object",
                           "defaultValue": null
@@ -240,7 +247,7 @@
                     "resources": [
                       {
                         "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
-                        "name": "[[concat(parameters('hubName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('zone'), '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]]",
+                        "name": "[concat(parameters('hubName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('zone'), '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]",
                         "apiVersion": "2020-05-01",
                         "properties": {
                           "allowVirtualNetworkAccess": true,
@@ -248,7 +255,7 @@
                           "allowGatewayTransit": true,
                           "useRemoteGateways": false,
                           "remoteVirtualNetwork": {
-                            "id": "[[parameters('remoteVirtualNetwork')]"
+                            "id": "[parameters('remoteVirtualNetwork')]"
                           }
                         }
                       }
