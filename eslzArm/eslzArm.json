@@ -350,6 +350,14 @@
                 "No"
             ]
         },
+        "enableDdoSIpFirewall": {
+            "type": "string",
+            "defaultValue": "No",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ]
+        },
         "enablePrivateDnsZones": {
             "type": "string",
             "defaultValue": "No",
@@ -909,6 +917,10 @@
             "privdns": {
                 "francais": "dnsprive",
                 "english": " privatedns"
+            },
+            "firewall": {
+                "francais": "parfeu",
+                "english": " firewall"
             }
         },
 
@@ -925,7 +937,10 @@
             "virtualNetwork": "vnet",
             "keyVault": "kv",
             "logAnalytics": "law",
-            "automationAccount": "aa"
+            "automationAccount": "aa",
+            "firewall": "fw",
+            "firewallpolicy": "fwp",
+            "publicip": "pip"
         },
 
         "mgPrefix":  "[concat(variables('resourcesPrefix').managementGroup, '-', parameters('enterpriseScaleCompanyPrefix'))]",
@@ -1119,15 +1134,15 @@
         // Declaring deterministic names for Resource Groups that will be created for platform resources
         "platformRgNames": {
             "mgmtLawRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').monitoring[parameters('resourcesLanguage')], '-', variables('localName').management[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "mgmtKvRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').keyvault[parameters('resourcesLanguage')], '-', variables('localName').management[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "mgmtVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').management[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "connectivityKvRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').keyvault[parameters('resourcesLanguage')], '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "connectivityNetworktRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
+            "mgmtKvRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').keyvault[parameters('resourcesLanguage')], '-', variables('localName').management[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "mgmtVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').management[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "connectivityKvRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').keyvault[parameters('resourcesLanguage')], '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "connectivityNetworktRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
             //"ddosRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').management[parameters('resourcesLanguage')], '-', variables('localName').management[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "connectivityPrivdnsRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').privdns[parameters('resourcesLanguage')], '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "identityVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').identity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "corpVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').corp[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "onlineVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').online[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]"
+            "connectivityPrivdnsRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').privdns[parameters('resourcesLanguage')], '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "identityVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').identity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "corpVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').corp[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "onlineVnetRg": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').online[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
         
         },
         // Declaring deterministic names for platform resources that will be created
@@ -1140,13 +1155,13 @@
             //"azFwPolicyName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-azfwpolicy-', parameters('connectivityLocation'))]",
             //"azFwName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-fw-', parameters('connectivityLocation'))]",
             //"azErGwIpName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-erpip-', parameters('connectivityLocation'))]",
-            "hubName": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
+            "hubName": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
             //"vwanName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-vwan-', parameters('connectivityLocation'))]",
             //"azVpnGwIpName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-gwpip-', parameters('connectivityLocation'))]",
             //"azFwIpName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-fwpip-', parameters('connectivityLocation'))]",
-            "identityVnet": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').identity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "corpVnet": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').corp[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]",
-            "onlineVnet": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').online[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('regionLAW')], '-001')]"
+            "identityVnet": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').identity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "corpVnet": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').corp[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
+            "onlineVnet": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').online[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
         },
 
         // Declaring deterministic resourceId's for platform resources that will be created
@@ -1637,9 +1652,6 @@
             }
         },
 
-
-
-
         
         /*
             The following optional deployment will configure virtual network hub into the connectivity subscription
@@ -1704,97 +1716,110 @@
 
 
         
-        // {
-        //     // Creating the virtual network hub (hub and spoke)
-        //     "condition": "[and(not(empty(parameters('connectivitySubscriptionId'))),equals(parameters('enableHub'), 'vhub'))]",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2020-10-01",
-        //     "scope": "[variables('scopes').connectivityManagementGroup]",
-        //     "name": "[variables('deploymentNames').vnetConnectivityHubDeploymentName]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').connectivitySubscriptionPlacement)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').ddosDeploymentName)]"
-        //     ],
-        //     "location": "[deployment().location]",
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "templateLink": {
-        //             "contentVersion": "1.0.0.0",
-        //             "uri": "[variables('deploymentUris').vnetConnectivityHub]"
-        //         },
-        //         "parameters": {
-        //             "topLevelManagementGroupPrefix": {
-        //                 "value": "[parameters('enterpriseScaleCompanyPrefix')]"
-        //             },
-        //             "ddosPlanResourceId": {
-        //                 "value": "[variables('platformResourceIds').ddosProtectionResourceId]"
-        //             },
-        //             "enableHub": {
-        //                 "value": "[parameters('enableHub')]"
-        //             },
-        //             "enableAzFw": {
-        //                 "value": "[parameters('enableAzFw')]"
-        //             },
-        //             "addressPrefix": {
-        //                 "value": "[parameters('addressPrefix')]"
-        //             },
-        //             "enableVpnGw": {
-        //                 "value": "[parameters('enableVpnGw')]"
-        //             },
-        //             "enableErGw": {
-        //                 "value": "[parameters('enableErGw')]"
-        //             },
-        //             "enableDdoS": {
-        //                 "value": "[parameters('enableDdoS')]"
-        //             },
-        //             "location": {
-        //                 "value": "[parameters('connectivityLocation')]"
-        //             },
-        //             "connectivitySubscriptionId": {
-        //                 "value": "[parameters('connectivitySubscriptionId')]"
-        //             },
-        //             "subnetMaskForAzFw": {
-        //                 "value": "[parameters('subnetMaskForAzFw')]"
-        //             },
-        //             "subnetMaskForAzFwMgmt": {
-        //                 "value": "[parameters('subnetMaskForAzFwMgmt')]"
-        //             },
-        //             "subnetMaskForGw": {
-        //                 "value": "[parameters('subnetMaskForGw')]"
-        //             },
-        //             "firewallSku": {
-        //                 "value": "[parameters('firewallSku')]"
-        //             },
-        //             "firewallZones": {
-        //                 "value": "[parameters('firewallZones')]"
-        //             },
-        //             "enableAzFwDnsProxy": {
-        //                 "value": "[parameters('enableAzFwDnsProxy')]"
-        //             },
-        //             "enableVpnActiveActive": {
-        //                 "value": "[parameters('enableVpnActiveActive')]"
-        //             },
-        //             "gwRegionalOrAz": {
-        //                 "value": "[parameters('gwRegionalOrAz')]"
-        //             },
-        //             "gwAzSku": {
-        //                 "value": "[parameters('gwAzSku')]"
-        //             },
-        //             "gwRegionalSku": {
-        //                 "value": "[parameters('gwRegionalSku')]"
-        //             },
-        //             "erRegionalOrAz": {
-        //                 "value": "[parameters('erRegionalOrAz')]"
-        //             },
-        //             "erAzSku": {
-        //                 "value": "[parameters('erAzSku')]"
-        //             },
-        //             "erRegionalSku": {
-        //                 "value": "[parameters('erRegionalSku')]"
-        //             }
-        //         }
-        //     }
-        // },
+        {
+            // Creating the virtual network hub (hub and spoke)
+            "condition": "[and(not(empty(parameters('connectivitySubscriptionId'))),equals(parameters('enableHub'), 'vhub'))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "scope": "[variables('scopes').connectivityManagementGroup]",
+            "name": "[variables('deploymentNames').vnetConnectivityHubDeploymentName]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').connectivitySubscriptionPlacement)]"
+                //"[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').ddosDeploymentName)]"
+            ],
+            "location": "[deployment().location]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').vnetConnectivityHub]"
+                },
+                "parameters": {
+                    "topLevelManagementGroupPrefix": {
+                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                    },
+                    "ddosPlanResourceId": {
+                        //"value": "[variables('platformResourceIds').ddosProtectionResourceId]"
+                        "value": null
+                    },
+                    "enableHub": {
+                        "value": "[parameters('enableHub')]"
+                    },
+                    "enableAzFw": {
+                        "value": "[parameters('enableAzFw')]"
+                    },
+                    "addressPrefix": {
+                        "value": "[parameters('addressPrefix')]"
+                    },
+                    "enableVpnGw": {
+                        "value": "[parameters('enableVpnGw')]"
+                    },
+                    "enableErGw": {
+                        "value": "[parameters('enableErGw')]"
+                    },
+                    "enableDdoS": {
+                        "value": "[parameters('enableDdoS')]"
+                    },
+                    "location": {
+                        "value": "[parameters('connectivityLocation')]"
+                    },
+                    "connectivitySubscriptionId": {
+                        "value": "[parameters('connectivitySubscriptionId')]"
+                    },
+                    "subnetMaskForAzFw": {
+                        "value": "[parameters('subnetMaskForAzFw')]"
+                    },
+                    "subnetMaskForAzFwMgmt": {
+                        "value": "[parameters('subnetMaskForAzFwMgmt')]"
+                    },
+                    "subnetMaskForGw": {
+                        "value": "[parameters('subnetMaskForGw')]"
+                    },
+                    "firewallSku": {
+                        "value": "[parameters('firewallSku')]"
+                    },
+                    "firewallZones": {
+                        "value": "[parameters('firewallZones')]"
+                    },
+                    "enableAzFwDnsProxy": {
+                        "value": "[parameters('enableAzFwDnsProxy')]"
+                    },
+                    "enableVpnActiveActive": {
+                        "value": "[parameters('enableVpnActiveActive')]"
+                    },
+                    "gwRegionalOrAz": {
+                        "value": "[parameters('gwRegionalOrAz')]"
+                    },
+                    "gwAzSku": {
+                        "value": "[parameters('gwAzSku')]"
+                    },
+                    "gwRegionalSku": {
+                        "value": "[parameters('gwRegionalSku')]"
+                    },
+                    "erRegionalOrAz": {
+                        "value": "[parameters('erRegionalOrAz')]"
+                    },
+                    "erAzSku": {
+                        "value": "[parameters('erAzSku')]"
+                    },
+                    "erRegionalSku": {
+                        "value": "[parameters('erRegionalSku')]"
+                    },
+                    "localName": {
+                        "value": "[variables('localName')]"
+                    },
+                    "regionShortName": {
+                        "value": "[variables('regionShortName')]"
+                    },
+                    "resourcesPrefix": {
+                        "value": "[variables('resourcesPrefix')]"
+                    },
+                    "resourcesLanguage": {
+                        "value": "[parameters('resourcesLanguage')]"
+                    }
+                }
+            }
+        },
         // {
         //     // Creating the virtual network hub (with NVA)
         //     "condition": "[and(not(empty(parameters('connectivitySubscriptionId'))),equals(parameters('enableHub'), 'nva'))]",

@@ -1295,6 +1295,26 @@
                             }
                         },
                         {
+                            "name": "enableDdoSIpFirewall",
+                            "type": "Microsoft.Common.OptionsGroup",
+                            "label": "Enable DDoS for the firewall IP",
+                            "defaultValue": "Yes (recommended)",
+                            "visible": "[and(not(equals(steps('connectivity').enableHub, 'No')), equals(steps('connectivity').enableDdoS, 'No')]",
+                            "toolTip": "If 'Yes' is selected when also adding a connectivity subscription, DDoS Network Protection will be enabled.",
+                            "constraints": {
+                                "allowedValues": [
+                                    {
+                                        "label": "Yes (recommended)",
+                                        "value": "Yes"
+                                    },
+                                    {
+                                        "label": "No",
+                                        "value": "No"
+                                    }
+                                ]
+                            }
+                        },
+                        {
                             "name": "enablePrivateDnsZones",
                             "type": "Microsoft.Common.OptionsGroup",
                             "label": "Create Private DNS Zones for Azure PaaS services",
@@ -3504,6 +3524,7 @@
                 "addressPrefix": "[coalesce(steps('connectivity').esAddressHubVWAN, steps('connectivity').esAddressHubHS, '')]",
                 "connectivityLocation": "[steps('connectivity').connectivityLocation]",
                 "enableDdoS": "[steps('connectivity').enableDdoS]",
+                "enableDdoSIpFirewall": "[steps('connectivity').enableDdoSIpFirewall]",
                 "enablePrivateDnsZones": "[steps('connectivity').enablePrivateDnsZones]",
                 "enableVpnGw": "[steps('connectivity').enableVpnGw]",
                 "gwRegionalOrAz": "[steps('connectivity').gwRegionalOrAz]",
