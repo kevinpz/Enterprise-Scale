@@ -927,7 +927,7 @@
         // Region 3 letters code
         "regionShortName" : {
             "canadacentral": "cac",
-            "canadaeast": " cae"
+            "canadaeast": "cae"
         },
 
         // Resources prefix
