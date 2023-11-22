@@ -25,12 +25,12 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').platformManagementGroup]",
+            "name": "[parameters('mgmtGroups').platform]",
             "dependsOn": [
                 "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').platformManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').platform]",
                 "details": {
                     "parent": {
                     "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
@@ -43,15 +43,15 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').connectivityManagementGroup]",
+            "name": "[parameters('mgmtGroups').connectivity]",
             "dependsOn": [
-                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platformManagementGroup)]"
+                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platform)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').connectivityManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').connectivity]",
                 "details": {
                     "parent": {
-                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platformManagementGroup)]"
+                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platform)]"
                     }
                 }
             }
@@ -61,15 +61,15 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').managementManagementGroup]",
+            "name": "[parameters('mgmtGroups').management]",
             "dependsOn": [
-                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platformManagementGroup)]"
+                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platform)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').managementManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').management]",
                 "details": {
                     "parent": {
-                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platformManagementGroup)]"
+                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platform)]"
                     }
                 }
             }
@@ -79,15 +79,15 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').identityManagementGroup]",
+            "name": "[parameters('mgmtGroups').identity]",
             "dependsOn": [
-                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platformManagementGroup)]"
+                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platform)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').identityManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').identity]",
                 "details": {
                     "parent": {
-                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platformManagementGroup)]"
+                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').platform)]"
                     }
                 }
             }
@@ -97,12 +97,12 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').lzsManagementGroup]",
+            "name": "[parameters('mgmtGroups').lzs]",
             "dependsOn": [
                 "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').lzsManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').lzs]",
                 "details": {
                     "parent": {
                     "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
@@ -115,15 +115,15 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').onlineManagementGroup]",
+            "name": "[parameters('mgmtGroups').online]",
             "dependsOn": [
-                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzsManagementGroup)]"
+                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzs)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').onlineManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').online]",
                 "details": {
                     "parent": {
-                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzsManagementGroup)]"
+                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzs)]"
                     }
                 }
             }
@@ -133,15 +133,15 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').corpManagementGroup]",
+            "name": "[parameters('mgmtGroups').corp]",
             "dependsOn": [
-                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzsManagementGroup)]"
+                "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzs)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').corpManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').corp]",
                 "details": {
                     "parent": {
-                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzsManagementGroup)]"
+                    "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').lzs)]"
                     }
                 }
             }
@@ -151,12 +151,12 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-            "name": "[parameters('mgmtGroups').sandboxManagementGroup]",
+            "name": "[parameters('mgmtGroups').sandboxes]",
             "dependsOn": [
                 "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').sandboxManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').sandboxes]",
                 "details": {
                     "parent": {
                     "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
@@ -169,12 +169,12 @@
             "type": "Microsoft.Management/managementGroups",
             "apiVersion": "2020-05-01",
             "scope": "/",
-           "name": "[parameters('mgmtGroups').decommissionedManagementGroup]",
+           "name": "[parameters('mgmtGroups').decommissioned]",
             "dependsOn": [
                 "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
             ],
             "properties": {
-                "displayName": "[parameters('mgmtGroups').decommissionedManagementGroup]",
+                "displayName": "[parameters('mgmtGroups').decommissioned]",
                 "details": {
                     "parent": {
                     "id": "[tenantResourceId('Microsoft.Management/managementGroups/', parameters('mgmtGroups').eslzRoot)]"
