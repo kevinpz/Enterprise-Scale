@@ -921,6 +921,14 @@
             "firewall": {
                 "francais": "parfeu",
                 "english": " firewall"
+            },
+             "vpn": {
+                "francais": "vpn",
+                "english": " vpn"
+            },
+            "to": {
+                "francais": "vers",
+                "english": " to"
             }
         },
 
@@ -942,7 +950,8 @@
             "firewallpolicy": "fwp",
             "publicip": "pip",
             "virtualNetworkGateway": "vgw",
-            "locallNetworkGateway": "lgw"
+            "locallNetworkGateway": "lgw",
+            "peering": "peer"
         },
 
         "mgPrefix":  "[concat(variables('resourcesPrefix').managementGroup, '-', parameters('enterpriseScaleCompanyPrefix'))]",
@@ -1155,7 +1164,7 @@
             //"erGwName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-ergw-', parameters('connectivityLocation'))]",
             //"ddosName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-ddos-', parameters('connectivityLocation'))]",
             //"azFwPolicyName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-azfwpolicy-', parameters('connectivityLocation'))]",
-            //"azFwName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-fw-', parameters('connectivityLocation'))]",
+            "azFwName": "[concat(variables('resourcesPrefix').firewall, '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
             //"azErGwIpName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-erpip-', parameters('connectivityLocation'))]",
             "hubName": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').connectivity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]",
             //"vwanName": "[concat(parameters('enterpriseScaleCompanyPrefix'), '-vwan-', parameters('connectivityLocation'))]",
@@ -1175,8 +1184,8 @@
             //"ddosProtectionResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').ddosRg, '/providers/Microsoft.Network/ddosProtectionPlans/', variables('platformResourceNames').ddosName)]",
             "vNetHubResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').connectivityNetworktRg, '/providers/Microsoft.Network/virtualNetworks/', variables('platformResourceNames').hubName)]",
             //"vWanHubResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').connectivityRg, '/providers/Microsoft.Network/virtualHubs/', variables('platformResourceNames').hubName)]",
-            "privateDnsRgResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').connectivityPrivdnsRg)]"
-            //"azFirewallResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').connectivityNetworktRg, '/providers/Microsoft.Network/azureFirewalls/', variables('platformResourceNames').azFwName)]"
+            "privateDnsRgResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').connectivityPrivdnsRg)]",
+            "azFirewallResourceId": "[concat('/subscriptions/', variables('singleVsDedicatedConnectivitySub'), '/resourceGroups/', variables('platformRgNames').connectivityNetworktRg, '/providers/Microsoft.Network/azureFirewalls/', variables('platformResourceNames').azFwName)]"
         },
         // Declaring deterministic resourceId's for ES Lite platform resources (as they will be consolidated into a single platform subscription)
         "deterministicRoleAssignmentGuids": {
@@ -2038,48 +2047,61 @@
 
 
 
-        // {
-        //     // Peer vnet in identity subscription to connectivity hub if vhub or nva contidion is true
-        //     "condition": "[and(or(equals(parameters('enableHub'), 'nva'), equals(parameters('enableHub'), 'vhub')), not(empty(parameters('identityAddressPrefix'))))]",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2020-06-01",
-        //     "name": "[variables('deploymentNames').identityPeeringDeploymentName]",
-        //     "subscriptionId": "[parameters('identitySubscriptionId')]",
-        //     "location": "[parameters('connectivityLocation')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').identitySubscriptionPlacement)]"
-        //     ],
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "templateLink": {
-        //             "contentVersion": "1.0.0.0",
-        //             "uri": "[variables('deploymentUris').corpVnetPeering]"
-        //         },
-        //         "parameters": {
-        //             "vNetRgName": {
-        //                 "value": "[variables('platformRgNames').identityVnetRg]"
-        //             },
-        //             "vNetName": {
-        //                 "value": "[take(concat(variables('platformResourceNames').identityVnet, '-',variables('lzResourceNames').identityVnetName), 64)]"
-        //             },
-        //             "vNetLocation": {
-        //                 "value": "[parameters('connectivityLocation')]"
-        //             },
-        //             "vNetCidrRange": {
-        //                 "value": "[parameters('identityAddressPrefix')]"
-        //             },
-        //             "hubResourceId": {
-        //                 "value": "[variables('platformResourceIds').vNetHubResourceId]"
-        //             },
-        //             "azureFirewallResourceId": {
-        //                 "value": "[if(equals(parameters('enableAzFwDnsProxy'), 'Yes'), variables('platformResourceIds').azFirewallResourceId, '')]"
-        //             }
-        //         }
-        //     }
-        // },
+        {
+            // Peer vnet in identity subscription to connectivity hub if vhub or nva contidion is true
+            "condition": "[and(or(equals(parameters('enableHub'), 'nva'), equals(parameters('enableHub'), 'vhub')), not(empty(parameters('identityAddressPrefix'))))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('deploymentNames').identityPeeringDeploymentName]",
+            "subscriptionId": "[parameters('identitySubscriptionId')]",
+            "location": "[parameters('connectivityLocation')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
+                //"[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
+                //"[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]",
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').identitySubscriptionPlacement)]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').corpVnetPeering]"
+                },
+                "parameters": {
+                    "vNetRgName": {
+                        "value": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').identity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
+
+                    },
+                    "vNetName": {
+                        "value": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').identity[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
+                    },
+                    "vNetLocation": {
+                        "value": "[parameters('connectivityLocation')]"
+                    },
+                    "vNetCidrRange": {
+                        "value": "[parameters('identityAddressPrefix')]"
+                    },
+                    "hubResourceId": {
+                        "value": "[variables('platformResourceIds').vNetHubResourceId]"
+                    },
+                    "azureFirewallResourceId": {
+                        "value": "[if(equals(parameters('enableAzFwDnsProxy'), 'Yes'), variables('platformResourceIds').azFirewallResourceId, '')]"
+                    },
+                    "localName": {
+                        "value": "[variables('localName')]"
+                    },
+                    "regionShortName": {
+                        "value": "[variables('regionShortName')]"
+                    },
+                    "resourcesPrefix": {
+                        "value": "[variables('resourcesPrefix')]"
+                    },
+                    "resourcesLanguage": {
+                        "value": "[parameters('resourcesLanguage')]"
+                    }
+                }
+            }
+        },
         // {
         //     // Peer vnet in identity subscription to connectivity hub if vwan contidion is true
         //     "condition": "[and(equals(parameters('enableHub'), 'vwan'), not(empty(parameters('identityAddressPrefix'))))]",

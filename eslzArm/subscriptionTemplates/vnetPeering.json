@@ -52,7 +52,23 @@
         "metadata": {
           "description": "Provide full resourceId of Azure Firewall if used as DNS proxy"
         }
-      }
+      },
+        "localName": {
+            "type": "object",
+            "defaultValue": null
+        },
+        "regionShortName": {
+            "type": "object",
+            "defaultValue": null
+        },
+        "resourcesPrefix": {
+            "type": "object",
+            "defaultValue": null
+        },
+        "resourcesLanguage": {
+            "type": "string",
+            "defaultValue": ""
+        }
     },
     "variables": {},
     "resources": [
@@ -130,7 +146,7 @@
               {
                 "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
                 "apiVersion": "2020-05-01",
-                "name": "[concat(parameters('vNetName'), '/peerToHub')]",
+                "name": "[concat(parameters('vNetName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').identity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]",
                 "dependsOn": [
                   "[parameters('vNetName')]"
                 ],
@@ -183,7 +199,7 @@
                     "resources": [
                       {
                         "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
-                        "name": "[[concat(parameters('hubName'),'/',last(split(parameters('remoteVirtualNetwork'),'/')))]",
+                        "name": "[[concat(parameters('vNetName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('localName').identity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]]",
                         "apiVersion": "2020-05-01",
                         "properties": {
                           "allowVirtualNetworkAccess": true,

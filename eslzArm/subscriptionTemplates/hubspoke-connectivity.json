@@ -183,7 +183,7 @@
     "variables": {
         "vpngwname": "[concat(parameters('resourcesPrefix').virtualNetworkGateway, '-vpn-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "vpnlgwname": "[concat(parameters('resourcesPrefix').locallNetworkGateway, '-vpn-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
-        "azVpnGwIpName": "[concat(parameters('resourcesPrefix').publicip, '-', parameters('localName').firewall[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
+        "azVpnGwIpName": "[concat(parameters('resourcesPrefix').publicip, '-', parameters('localName').vpn[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "erGwName": "[concat(parameters('topLevelManagementGroupPrefix'), '-ergw-', parameters('location'))]",
         "rgName": "[concat(parameters('resourcesPrefix').resourceGroup, '-', parameters('localName').network[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
         "azFwName": "[concat(parameters('resourcesPrefix').firewall, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('location')], '-001')]",
