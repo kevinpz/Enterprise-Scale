@@ -251,7 +251,7 @@
                         "apiVersion": "2020-05-01",
                         "properties": {
                           "allowVirtualNetworkAccess": true,
-                          "allowForwardedTraffic": true,
+                          "allowForwardedTraffic": false,
                           "allowGatewayTransit": true,
                           "useRemoteGateways": false,
                           "remoteVirtualNetwork": {
