@@ -3220,7 +3220,7 @@
                                     "filter": true,
                                     "filterPlaceholder": "Filter items ...",
                                     "multiLine": true,
-                                    "visible": "[or(or(equals(steps('landingZones').corpSection.esLzConnectivityOnline, 'No'), equals(steps('connectivity').enableHub, 'No')), equals(steps('connectivity').enableHub, 'vwan'), equals(steps('landingZones').corpSection.esLzConnectivityOnline, 'No'))]",
+                                    "visible": "[or(or(equals(steps('landingZones').onlineSection.esLzConnectivityOnline, 'No'), equals(steps('connectivity').enableHub, 'No')), equals(steps('connectivity').enableHub, 'vwan'), equals(steps('landingZones').onlineSection.esLzConnectivityOnline, 'No'))]",
                                     "constraints": {
                                         "allowedValues": "[steps('basics').getSubscriptions.data]",
                                         "required": false
@@ -3231,7 +3231,7 @@
                                     "type": "Microsoft.Common.EditableGrid",
                                     "ariaLabel": "Add existing subscriptions into the management group landing zone and provide address space for virtual network peering",
                                     "label": "Online connected landing zone subscriptions (optional)",
-                                    "visible": "[equals(steps('landingZones').corpSection.esLzConnectivityOnline, 'Yes')]",
+                                    "visible": "[equals(steps('landingZones').onlineSection.esLzConnectivityOnline, 'Yes')]",
                                     "constraints": {
                                         "width": "Full",
                                         "rows": {
