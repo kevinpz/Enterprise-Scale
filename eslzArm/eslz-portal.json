@@ -3282,7 +3282,7 @@
                                             }
                                         ]
                                     }
-                                },
+                                }
                             ],
                             "visible": "[equals(steps('basics').cloudEnvironment.selection, 'AzureCloud')]"
                         }
