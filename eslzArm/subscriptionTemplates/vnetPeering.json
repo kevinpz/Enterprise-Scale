@@ -20,6 +20,12 @@
             "description": "Provide a location for the virtual network."
         }
       },
+      "zone": {
+        "type": "string",
+        "metadata": {
+            "description": "Provide a location for the virtual network."
+        }
+      },
       "vNetCidrRange": {
         "type": "string",
         "metadata": {
@@ -28,7 +34,7 @@
       },
       "vNetPeerUseRemoteGateway": {
         "type": "bool",
-        "defaultValue": false,
+        "defaultValue": true,
         "metadata": {
             "description": "Use remote gateway or not."
         }        
@@ -146,7 +152,7 @@
               {
                 "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
                 "apiVersion": "2020-05-01",
-                "name": "[concat(parameters('vNetName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').identity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]",
+                "name": "[concat(parameters('vNetName'), '/', parameters('resourcesPrefix').peering, '-', parameters('zone'), '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]",
                 "dependsOn": [
                   "[parameters('vNetName')]"
                 ],
@@ -156,7 +162,7 @@
                   },
                   "allowVirtualNetworkAccess": true,
                   "allowForwardedTraffic": true,
-                  "allowGatewayTransit": true,
+                  "allowGatewayTransit": false,
                   "useRemoteGateways": "[parameters('vNetPeerUseRemoteGateway')]"
                 }
               },
@@ -180,6 +186,21 @@
                     },
                     "hubName": {
                       "value": "[split(parameters('hubResourceId'),'/')[8]]"
+                    },
+                    "zone": {
+                      "value": "[parameters('zone')]"
+                    },
+                    "localName": {
+                      "value": "[parameters('localName')]"
+                    },
+                    "regionShortName": {
+                      "value": "[parameters('regionShortName')]"
+                    },
+                    "resourcesPrefix": {
+                      "value": "[parameters('resourcesPrefix')]"
+                    },
+                    "resourcesLanguage": {
+                      "value": "[parameters('resourcesLanguage')]"
                     }
                   },
                   "template": {
@@ -190,16 +211,36 @@
                         "type": "String",
                         "defaultValue": false
                       },
+                      "zone": {
+                        "type": "String",
+                        "defaultValue": false
+                      },
                       "hubName": {
                         "type": "String",
                         "defaultValue": false
-                      }
+                      },
+                      "localName": {
+                          "type": "object",
+                          "defaultValue": null
+                      },
+                      "regionShortName": {
+                          "type": "object",
+                          "defaultValue": null
+                      },
+                      "resourcesPrefix": {
+                          "type": "object",
+                          "defaultValue": null
+                      },
+                      "resourcesLanguage": {
+                          "type": "string",
+                          "defaultValue": ""
+        }
                     },
                     "variables": {},
                     "resources": [
                       {
                         "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
-                        "name": "[[concat(parameters('vNetName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('localName').identity[parameters('resourcesLanguage')], '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]]",
+                        "name": "[[concat(parameters('hubName'), '/', parameters('resourcesPrefix').peering, '-', parameters('localName').connectivity[parameters('resourcesLanguage')], '-', parameters('localName').to[parameters('resourcesLanguage')], '-', parameters('zone'), '-prod-', parameters('regionShortName')[parameters('vNetLocation')], '-001')]]",
                         "apiVersion": "2020-05-01",
                         "properties": {
                           "allowVirtualNetworkAccess": true,

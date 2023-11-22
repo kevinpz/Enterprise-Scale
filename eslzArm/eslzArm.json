@@ -578,6 +578,13 @@
                 "description": "Provide the subscription ids for existing, empty subscriptions you want to move in as your first online landing zones."
             }
         },
+        "onlineConnectedLzSubscriptionId": {
+            "type": "array",
+            "defaultValue": [],
+            "metadata": {
+                "description": "Provide the subscription ids for existing, empty subscriptions you want to move in as your first online landing zones."
+            }
+        },
         "enableLzDdoS": {
             "type": "string",
             "defaultValue": "No",
@@ -1064,6 +1071,7 @@
             "mgmtGroupDeploymentName": "[take(concat('alz-Mgs', variables('deploymentSuffix')), 64)]",
             "mgmtSubscriptionPlacement": "[take(concat('alz-MgmtSub', variables('deploymentSuffix')), 64)]",
             "corpPeeringDeploymentName": "[take(concat('alz-CorpPeering', variables('deploymentSuffix')), 60)]",
+            "onlinePeeringDeploymentName": "[take(concat('alz-OnlinePeering', variables('deploymentSuffix')), 60)]",
             "connectivitySubscriptionPlacement": "[take(concat('alz-ConnectivitySub', variables('deploymentSuffix')), 64)]",
             "identitySubscriptionPlacement": "[take(concat('alz-IdentitySub', variables('deploymentSuffix')), 64)]",
             "roleDefsDeploymentName": "[take(concat('alz-RoleDefs', variables('deploymentSuffix')), 64)]",
@@ -1124,6 +1132,7 @@
             "decommissionPolicyDeploymentName": "[take(concat('alz-DecommissionPol', variables('deploymentSuffix')), 64)]",
             "sandboxPolicyDeploymentName": "[take(concat('alz-SandboxPol', variables('deploymentSuffix')), 64)]",
             "onlineLzSubs": "[take(concat('alz-OnlineLzs', variables('deploymentSuffix')), 60)]",
+            "onlineConnectedLzSubs": "[take(concat('alz-OnlineConnLzs', variables('deploymentSuffix')), 60)]",
             "corpLzSubs": "[take(concat('alz-CorpLzs', variables('deploymentSuffix')), 60)]",
             "corpConnectedMoveLzSubs": "[take(concat('alz-CorpConnLzs', variables('deploymentSuffix')), 50)]",
             "corpConnectedLzSubs": "[take(concat('alz-CorpPeering', variables('deploymentSuffix')), 50)]",
@@ -1499,6 +1508,39 @@
                 }
             }
         },
+        {
+            // Placing subscriptions into online landing zone management group
+            "condition": "[not(empty(parameters('onlineConnectedLzSubscriptionId')))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-10-01",
+            "name": "[concat(variables('deploymentNames').onlineConnectedLzSubs, copyIndex())]",
+            "scope": "[variables('scopes').onlineManagementGroup]",
+            "location": "[deployment().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
+            ],
+            "copy": {
+                "name": "onlineConnectedMoveLzs",
+                "count": "[length(parameters('onlineConnectedLzSubscriptionId'))]"
+            },
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').subscriptionPlacement]"
+                },
+                "parameters": {
+                    "targetManagementGroupId": {
+                        "value": "[variables('mgmtGroups').corp]"
+                    },
+                    "subscriptionId": {
+                        "value": "[parameters('onlineConnectedLzSubscriptionId')[copyIndex()].subs]"
+                    }
+                }
+            }
+        },
+
+
         {
             // Placing subscriptions into corp landing zone management group
             "condition": "[not(empty(parameters('corpLzSubscriptionId')))]",
@@ -2099,6 +2141,9 @@
                     },
                     "resourcesLanguage": {
                         "value": "[parameters('resourcesLanguage')]"
+                    },
+                    "zone": {
+                        "value": "[variables('localName').identity[parameters('resourcesLanguage')]]"
                     }
                 }
             }
@@ -2154,54 +2199,130 @@
 
 
 
-        // {
-        //     // Peering corp connected lz vnet to connectivity sub (when nva or vhub is selected)
-        //     "condition": "[and(or(equals(parameters('enableHub'), 'nva'), equals(parameters('enableHub'), 'vhub')), not(empty(parameters('corpConnectedLzSubscriptionId'))))]",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2020-06-01",
-        //     "name": "[concat(variables('deploymentNames').corpPeeringDeploymentName, copyIndex())]",
-        //     "subscriptionId": "[if(not(empty(parameters('corpConnectedLzSubscriptionId'))), parameters('corpConnectedLzSubscriptionId')[copyIndex()].subs, '')]",
-        //     "location": "[parameters('connectivityLocation')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]",
-        //         "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').ddosLzPolicyDeploymentName)]",
-        //         "corpConnectedMoveLzs"
-        //     ],
-        //     "copy": {
-        //         "name": "corpConnectedPeering",
-        //         "count": "[length(parameters('corpConnectedLzSubscriptionId'))]"
-        //     },
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "templateLink": {
-        //             "contentVersion": "1.0.0.0",
-        //             "uri": "[variables('deploymentUris').corpVnetPeering]"
-        //         },
-        //         "parameters": {
-        //             "vNetRgName": {
-        //                 "value": "[variables('platformRgNames').lzVnetRg]"
-        //             },
-        //             "vNetName": {
-        //                 "value": "[take(concat(variables('platformResourceNames').lzVnet, '-', variables('lzResourceNames').corpVnetName), 64)]"
-        //             },
-        //             "vNetLocation": {
-        //                 "value": "[parameters('connectivityLocation')]"
-        //             },
-        //             "vNetCidrRange": {
-        //                 "value": "[parameters('corpConnectedLzSubscriptionId')[copyIndex()].addresses]"
-        //             },
-        //             "hubResourceId": {
-        //                 "value": "[variables('platformResourceIds').vNetHubResourceId]"
-        //             },
-        //             "azureFirewallResourceId": {
-        //                 "value": "[if(equals(parameters('enableAzFwDnsProxy'), 'Yes'), variables('platformResourceIds').azFirewallResourceId, '')]"
-        //             }
-        //         }
-        //     }
-        // },
-
+        {
+            // Peering corp connected lz vnet to connectivity sub (when nva or vhub is selected)
+            "condition": "[and(or(equals(parameters('enableHub'), 'nva'), equals(parameters('enableHub'), 'vhub')), not(empty(parameters('corpConnectedLzSubscriptionId'))))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(variables('deploymentNames').corpPeeringDeploymentName, copyIndex())]",
+            "subscriptionId": "[if(not(empty(parameters('corpConnectedLzSubscriptionId'))), parameters('corpConnectedLzSubscriptionId')[copyIndex()].subs, '')]",
+            "location": "[parameters('connectivityLocation')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
+               // "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
+                // "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]",
+              //  "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').ddosLzPolicyDeploymentName)]",
+                "corpConnectedMoveLzs"
+            ],
+            "copy": {
+                "name": "corpConnectedPeering",
+                "count": "[length(parameters('corpConnectedLzSubscriptionId'))]"
+            },
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').corpVnetPeering]"
+                },
+                "parameters": {
+                    "vNetRgName": {
+                        "value": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').corp[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
+                    },
+                    "vNetName": {
+                        "value": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').corp[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
+                    },
+                    "vNetLocation": {
+                        "value": "[parameters('connectivityLocation')]"
+                    },
+                    "vNetCidrRange": {
+                        "value": "[parameters('corpConnectedLzSubscriptionId')[copyIndex()].addresses]"
+                    },
+                    "hubResourceId": {
+                        "value": "[variables('platformResourceIds').vNetHubResourceId]"
+                    },
+                    "azureFirewallResourceId": {
+                        "value": "[if(equals(parameters('enableAzFwDnsProxy'), 'Yes'), variables('platformResourceIds').azFirewallResourceId, '')]"
+                    },
+                    "localName": {
+                        "value": "[variables('localName')]"
+                    },
+                    "regionShortName": {
+                        "value": "[variables('regionShortName')]"
+                    },
+                    "resourcesPrefix": {
+                        "value": "[variables('resourcesPrefix')]"
+                    },
+                    "resourcesLanguage": {
+                        "value": "[parameters('resourcesLanguage')]"
+                    },
+                    "zone": {
+                        "value": "[variables('localName').corp[parameters('resourcesLanguage')]]"
+                    }
+                }
+            }
+        },
+        {
+            // Peering online connected lz vnet to connectivity sub (when nva or vhub is selected)
+            "condition": "[and(or(equals(parameters('enableHub'), 'nva'), equals(parameters('enableHub'), 'vhub')), not(empty(parameters('onlineConnectedLzSubscriptionId'))))]",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(variables('deploymentNames').onlineConnectedLzSubs, copyIndex())]",
+            "subscriptionId": "[if(not(empty(parameters('onlineConnectedLzSubscriptionId'))), parameters('onlineConnectedLzSubscriptionId')[copyIndex()].subs, '')]",
+            "location": "[parameters('connectivityLocation')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vnetConnectivityHubDeploymentName)]",
+               // "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').vwanConnectivityHubDeploymentName)]",
+                // "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').nvaConnectivityHubDeploymentName)]",
+              //  "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').ddosLzPolicyDeploymentName)]",
+                "onlineConnectedMoveLzs"
+            ],
+            "copy": {
+                "name": "onlineConnectedPeering",
+                "count": "[length(parameters('onlineConnectedLzSubscriptionId'))]"
+            },
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "[variables('deploymentUris').corpVnetPeering]"
+                },
+                "parameters": {
+                    "vNetRgName": {
+                        "value": "[concat(variables('resourcesPrefix').resourceGroup, '-', variables('localName').network[parameters('resourcesLanguage')], '-', variables('localName').online[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
+                    },
+                    "vNetName": {
+                        "value": "[concat(variables('resourcesPrefix').virtualNetwork, '-', variables('localName').online[parameters('resourcesLanguage')], '-prod-', variables('regionShortName')[parameters('connectivityLocation')], '-001')]"
+                    },
+                    "vNetLocation": {
+                        "value": "[parameters('connectivityLocation')]"
+                    },
+                    "vNetCidrRange": {
+                        "value": "[parameters('onlineConnectedLzSubscriptionId')[copyIndex()].addresses]"
+                    },
+                    "hubResourceId": {
+                        "value": "[variables('platformResourceIds').vNetHubResourceId]"
+                    },
+                    "azureFirewallResourceId": {
+                        "value": "[if(equals(parameters('enableAzFwDnsProxy'), 'Yes'), variables('platformResourceIds').azFirewallResourceId, '')]"
+                    },
+                    "localName": {
+                        "value": "[variables('localName')]"
+                    },
+                    "regionShortName": {
+                        "value": "[variables('regionShortName')]"
+                    },
+                    "resourcesPrefix": {
+                        "value": "[variables('resourcesPrefix')]"
+                    },
+                    "resourcesLanguage": {
+                        "value": "[parameters('resourcesLanguage')]"
+                    },
+                    "zone": {
+                        "value": "[variables('localName').online[parameters('resourcesLanguage')]]"
+                    }
+                }
+            }
+        },
 
 
 
