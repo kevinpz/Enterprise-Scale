@@ -34,8 +34,8 @@
         },
         "policyAssignmentNames": {
             "vmMonitoring": "Deploy-VM-Monitoring",
-            "description": "Active Azure Monitor pour les VMs",
-            "displayName": "Active Azure Monitor pour les VMs"
+            "description": "Configure Azure Monitor pour les VMs",
+            "displayName": "Configure Azure Monitor pour les VMs"
         },
         "nonComplianceMessage": {
             "message": "Azure Monitor {enforcementMode} be enabled for Virtual Machines.",

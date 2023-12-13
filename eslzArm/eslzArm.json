@@ -2351,7 +2351,7 @@
             "apiVersion": "2019-10-01",
             "name": "[variables('deploymentNames').policyDeploymentName]",
             "location": "[deployment().location]",
-            "scope": "[concat('Microsoft.Management/managementGroups/', parameters('enterpriseScaleCompanyPrefix'))]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', variables('scopes').eslzRootManagementGroup)]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
             ],
@@ -2363,7 +2363,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     }
                 }
             }
@@ -2374,7 +2374,7 @@
             "apiVersion": "2020-10-01",
             "name": "[concat('preparingToLaunch', copyIndex())]",
             "location": "[deployment().location]",
-            "scope": "[concat('Microsoft.Management/managementGroups/', parameters('enterpriseScaleCompanyPrefix'))]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', variables('scopes').eslzRootManagementGroup))]",
             "dependsOn": [
                 "[variables('deploymentNames').policyDeploymentName]"
             ],
@@ -2418,7 +2418,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "rgName": {
                         "value": "[variables('platformRgNames').mgmtLawRg]"
@@ -2451,7 +2451,8 @@
             "location": "[deployment().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtSubscriptionPlacement)]",
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "copy": {
                 "name": "mgDiagSettings",
@@ -2502,7 +2503,8 @@
             "location": "[deployment().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtSubscriptionPlacement)]",
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2512,7 +2514,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "logAnalyticsResourceId": {
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
@@ -2529,7 +2531,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2542,7 +2545,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     }
                 }
             }
@@ -2566,7 +2569,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     }
                 }
             }
@@ -2580,7 +2583,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2593,7 +2597,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "emailContactAsc": {
                         "value": "[parameters('emailContactAsc')]"
@@ -2655,7 +2659,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2665,7 +2670,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableAscForOssDb'), 'DeployIfNotExists'), 'Default', 'DoNotEnforce')]"
@@ -2682,7 +2687,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2692,7 +2698,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableAscForSql'), 'DeployIfNotExists'), 'Default', 'DoNotEnforce')]"
@@ -2719,7 +2725,7 @@
         //         },
         //         "parameters": {
         //             "topLevelManagementGroupPrefix": {
-        //                 "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+        //                 "value": "[variables('scopes').eslzRootManagementGroup)]"
         //             },
         //             "enforcementMode": {
         //                 "value": "[if(equals(parameters('enableMDEndpoints'), 'DeployIfNotExists'), 'Default', 'DoNotEnforce')]"
@@ -2736,7 +2742,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2800,7 +2807,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "emailContactAsc": {
                         "value": "[parameters('emailContactAsc')]"
@@ -2889,7 +2896,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "location": {
                         "value": "[parameters('connectivityLocation')]"
@@ -2912,7 +2919,8 @@
             "location": "[deployment().location]",
             "subscriptionId": "[variables('singleVsDedicatedConnectivitySub')]",
             "dependsOn": [
-                "[variables('deploymentNames').privateDnsPolicyDeploymentName]"
+                "[variables('deploymentNames').privateDnsPolicyDeploymentName]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2922,7 +2930,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "principalId": {
                         "value": "[if(equals(parameters('enablePrivateDnsZonesForLzs'), 'Yes'), reference(variables('deploymentNames').privateDnsPolicyDeploymentName).outputs.principalId.value, 'na')]"
@@ -2942,7 +2950,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2955,7 +2964,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableVmMonitoring'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -2972,7 +2981,8 @@
             "scope": "[variables('scopes').eslzRootManagementGroup]",
             "location": "[deployment().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -2985,7 +2995,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableVmssMonitoring'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3012,7 +3022,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableVmBackup'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3042,7 +3052,7 @@
                         "value": "[variables('platformResourceIds').ddosProtectionResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableLzDdoS'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3069,7 +3079,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableaksPolicy'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3168,7 +3178,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableEncryptionInTransit'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3219,7 +3229,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('denyPublicEndpoints'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3270,7 +3280,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('denyMgmtPorts'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3321,7 +3331,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enforceKvGuardrails'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3348,7 +3358,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enforceKvGuardrailsPlat'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3399,7 +3409,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "privateLinkDnsZones": {
                         "value": "[variables('privateDnsZonesMerge')]"
@@ -3453,7 +3463,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enforceACSB'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3480,7 +3490,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('denySubnetWithoutNsg'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3498,7 +3508,8 @@
             "location": "[deployment().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtSubscriptionPlacement)]",
-                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]"
+                "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').monitoringDeploymentName)]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -3508,7 +3519,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "logAnalyticsResourceId": {
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
@@ -3528,7 +3539,8 @@
             "location": "[deployment().location]",
             "subscriptionId": "[variables('singleVsDedicatedMgmtSub')]",
             "dependsOn": [
-                "[variables('deploymentNames').sqlAuditPolicyDeploymentName]"
+                "[variables('deploymentNames').sqlAuditPolicyDeploymentName]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -3538,7 +3550,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "principalId": {
                         "value": "[if(equals(parameters('enableSqlAudit'), 'Yes'), reference(variables('deploymentNames').sqlAuditPolicyDeploymentName).outputs.principalId.value, 'na')]"
@@ -3558,7 +3570,8 @@
             "location": "[deployment().location]",
             "subscriptionId": "[variables('singleVsDedicatedMgmtSub')]",
             "dependsOn": [
-                "[variables('deploymentNames').sqlAuditPolicyDeploymentName]"
+                "[variables('deploymentNames').sqlAuditPolicyDeploymentName]",
+                "policyCompletion"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -3568,7 +3581,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "principalId": {
                         "value": "[if(equals(parameters('enableSqlAudit'), 'Yes'), reference(variables('deploymentNames').sqlAuditPolicyDeploymentName).outputs.principalId.value, 'na')]"
@@ -3598,7 +3611,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableSqlEncryption'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3625,7 +3638,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableSqlThreat'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3652,7 +3665,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableDecommissioned'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3679,7 +3692,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableSandbox'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3765,7 +3778,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "Default"
@@ -3793,7 +3806,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "enforcementMode": {
                         "value": "Default"
@@ -3821,7 +3834,7 @@
             "apiVersion": "2019-10-01",
             "name": "[variables('deploymentNames').monitorPolicyDeploymentName]",
             "location": "[deployment().location]",
-            "scope": "[concat('Microsoft.Management/managementGroups/', parameters('enterpriseScaleCompanyPrefix'))]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', variables('scopes').eslzRootManagementGroup))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('deploymentNames').mgmtGroupDeploymentName)]"
             ],
@@ -3833,7 +3846,7 @@
                 },
                 "parameters": {
                     "enterpriseScaleCompanyPrefix": {
-                        "value": "[parameters('enterpriseScaleCompanyPrefix')]"
+                        "value": "[variables('scopes').eslzRootManagementGroup)]"
                     },
                     "telemetryOptOut": {
                         "value": "[parameters('telemetryOptOut')]"

@@ -27,8 +27,8 @@
         },
         "policyAssignmentNames": {
             "DineAtpOssDb": "Deploy-MDFC-OssDb",
-            "description": "Configure le Advanced Threat Protection pour être activée sur les bases de données open-source",
-            "displayName": "Configure la Advanced Threat Protection pour être activée sur les bases de données open-source"
+            "description": "Configure Advanced Threat Protection pour être activé sur les bases de données open-source",
+            "displayName": "Configure Advanced Threat Protection pour être activé sur les bases de données open-source"
         },
         "nonComplianceMessage": {
             "message": "Advanced Threat Protection {enforcementMode} be enabled on open-source relational databases.",

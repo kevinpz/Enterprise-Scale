@@ -34,8 +34,8 @@
         },
         "policyAssignmentNames": {
             "vmssMonitoring": "Deploy-VMSS-Monitoring",
-            "description": "Active Azure Monitor pour les VMSS",
-            "displayName": "Active Azure Monitor pour les VMSS"
+            "description": "Configure Azure Monitor pour les VMSS",
+            "displayName": "Configure Azure Monitor pour les VMSS"
         },
         "nonComplianceMessage": {
             "message": "Azure Monitor {enforcementMode} be enabled for Virtual Machines Scales Sets.",
