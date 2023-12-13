@@ -29,8 +29,8 @@
         },
         "policyAssignmentNames": {
             "denyClassicResources": "Deny-Classic-Resources",
-            "description": "Denies deployment of classic resource types under the assigned scope.",
-            "displayName": "Deny the deployment of classic resources"
+            "description": "Bloque le déploiement des ressources de type classic",
+            "displayName": "Bloque le déploiement des ressources de type classic"
         },
         "nonComplianceMessage": {
             "message": "Classic resources {enforcementMode} not be deployed.",

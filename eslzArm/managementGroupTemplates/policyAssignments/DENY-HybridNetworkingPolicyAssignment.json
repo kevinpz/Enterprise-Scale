@@ -29,8 +29,8 @@
         },
         "policyAssignmentNames": {
             "denyHybridNetworking": "Deny-HybridNetworking",
-            "description": "Denies deployment of vWAN/ER/VPN gateway resources in the Corp landing zone.",
-            "displayName": "Deny the deployment of vWAN/ER/VPN gateway resources"
+            "description": "Bloque le déploiement des ressources de type vWAN/ER/VPN gateway",
+            "displayName": "Bloque le déploiement des ressources de type vWAN/ER/VPN gateway"
         },
         "nonComplianceMessage": {
             "message": "vWAN/ER/VPN gateway resources {enforcementMode} not be deployed in the Corp landing zone.",

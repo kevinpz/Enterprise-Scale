@@ -27,8 +27,8 @@
         },
         "policyAssignmentNames": {
             "enforceGuardrailsKeyVault": "Enforce-GR-KeyVault",
-            "description": "This initiative assignment enables recommended ALZ guardrails for Azure Key Vault.",
-            "displayName": "Enforce recommended guardrails for Azure Key Vault"
+            "description": "Force les recommendation de sécurité pour les Key Vault",
+            "displayName": "Force les recommendation de sécurité pour les Key Vault"
         },
         "nonComplianceMessage": {
             "message": "Recommended guardrails {enforcementMode} be enforced for Azure Key Vault.",

@@ -63,8 +63,9 @@
         },
         "policyAssignmentNames": {
             "logAnalytics": "Deploy-Log-Analytics",
-            "description": "Deploy resource group containing Log Analytics workspace and linked automation account to centralize logs and monitoring. The automation account is aprerequisite for solutions like Updates and Change Tracking.",
-            "displayName": "Configure Log Analytics workspace and automation account to centralize logs and monitoring"
+            "description": "Configure le Log Analytics workspace et l'automation account pour centraliser les logs",
+            "displayName": "Configure le Log Analytics workspace et l'automation account pour centraliser les logs"
+            //"displayName": "Configure Log Analytics workspace and automation account to centralize logs and monitoring"
         },
         "nonComplianceMessage": {
             "message": "Log Analytics workspace and automation account {enforcementMode} be configured to centralize logs and monitoring.",

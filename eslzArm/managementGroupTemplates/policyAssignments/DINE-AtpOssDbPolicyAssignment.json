@@ -27,8 +27,8 @@
         },
         "policyAssignmentNames": {
             "DineAtpOssDb": "Deploy-MDFC-OssDb",
-            "description": "Enable Advanced Threat Protection on your non-Basic tier open-source relational databases to detect anomalous activities indicating unusual and potentially harmful attempts to access or exploit databases. See https://aka.ms/AzDforOpenSourceDBsDocu.",
-            "displayName": "Configure Advanced Threat Protection to be enabled on open-source relational databases"
+            "description": "Configure le Advanced Threat Protection pour être activée sur les bases de données open-source",
+            "displayName": "Configure la Advanced Threat Protection pour être activée sur les bases de données open-source"
         },
         "nonComplianceMessage": {
             "message": "Advanced Threat Protection {enforcementMode} be enabled on open-source relational databases.",

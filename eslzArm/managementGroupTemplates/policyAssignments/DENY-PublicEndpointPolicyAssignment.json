@@ -27,8 +27,8 @@
         },
         "policyAssignmentNames": {
             "denyPublicEndpoint": "Deny-Public-Endpoints",
-            "displayName": "Public network access should be disabled for PaaS services",
-            "description": "This policy initiative is a group of policies that prevents creation of Azure PaaS services with exposed public endpoints"
+            "displayName": "Bloque l'utilisation de public endpoints sur les services PaaS",
+            "description": "Bloque l'utilisation de public endpoints sur les services PaaS"
         },
         "nonComplianceMessage": {
             "message": "Public network access {enforcementMode} be disabled for PaaS services.",

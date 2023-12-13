@@ -94,8 +94,8 @@
         },
         "policyAssignmentNames": {
             "deployPrivateDnsZones": "Deploy-Private-DNS-Zones",
-            "displayName": "Configure Azure PaaS services to use private DNS zones",
-            "description": "This policy initiative is a group of policies that ensures private endpoints to Azure PaaS services are integrated with Azure Private DNS zones"
+            "displayName": "Configure les services Azure pour utiliser les zones privées DNS",
+            "description": "Configure les services Azure pour utiliser les zones privées DNS"
         },
         "nonComplianceMessage": {
             "message": "Azure PaaS services {enforcementMode} use private DNS zones.",

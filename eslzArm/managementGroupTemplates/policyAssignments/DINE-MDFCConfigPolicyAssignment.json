@@ -159,8 +159,8 @@
         },
         "policyAssignmentNames": {
             "azureSecurity": "Deploy-MDFC-Config",
-            "description": "Deploy Microsoft Defender for Cloud and Security Contacts",
-            "displayName": "Deploy Microsoft Defender for Cloud configuration"
+            "description": "Déploie la configuration pour Microsoft Defender for Cloud",
+            "displayName": "Déploie la configuration pour Microsoft Defender for Cloud"
         },
         "nonComplianceMessage": {
             "message": "Microsoft Defender for Cloud and Security Contacts {enforcementMode} be deployed.",

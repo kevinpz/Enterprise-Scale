@@ -33,8 +33,8 @@
         },
         "policyAssignmentNames": {
             "deploySqlAuditing": "Deploy-AzSqlDb-Auditing",
-            "description": "To ensure the operations performed against your SQL assets are captured, SQL servers should have auditing enabled. If auditing is not enabled, this policy will configure auditing events to flow to the specified Log Analytics workspace.",
-            "displayName": "Configure SQL servers to have auditing enabled to Log Analytics workspace"
+            "description": "Configure les serveurs SQL pour avoir le mode audit d'activé vers un LAW",
+            "displayName": "Configure les serveurs SQL pour avoir le mode audit d'activé vers un LAW"
         },
         "nonComplianceMessage": {
             "message": "SQL servers {enforcementMode} have auditing enabled to Log Analytics workspace.",

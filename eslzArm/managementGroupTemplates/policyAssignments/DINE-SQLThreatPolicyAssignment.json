@@ -27,8 +27,8 @@
         },
         "policyAssignmentNames": {
             "deploySqlThreat": "Deploy-SQL-Threat",
-            "description": "This policy ensures that Threat Detection is enabled on SQL Servers.",
-            "displayName": "Deploy Threat Detection on SQL servers"
+            "description": "Deploie la détection de menaces sur les serveurs SQL",
+            "displayName": "Deploie la détection de menaces sur les serveurs SQL"
         },
         "nonComplianceMessage": {
             "message": "Threat Detection {enforcementMode} be deployed on SQL servers.",

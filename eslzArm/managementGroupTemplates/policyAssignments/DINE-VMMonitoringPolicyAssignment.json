@@ -34,8 +34,8 @@
         },
         "policyAssignmentNames": {
             "vmMonitoring": "Deploy-VM-Monitoring",
-            "description": "Enable Azure Monitor for the virtual machines (VMs) in the specified scope (management group, subscription or resource group). Takes Log Analytics workspace as parameter.",
-            "displayName": "Enable Azure Monitor for VMs"
+            "description": "Active Azure Monitor pour les VMs",
+            "displayName": "Active Azure Monitor pour les VMs"
         },
         "nonComplianceMessage": {
             "message": "Azure Monitor {enforcementMode} be enabled for Virtual Machines.",

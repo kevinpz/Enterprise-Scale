@@ -21,8 +21,8 @@
          },
         "policyAssignmentNames": {
             "denyIpForwarding": "Deny-IP-forwarding",
-            "description": "This policy denies the network interfaces which enabled IP forwarding. The setting of IP forwarding disables Azure's check of the source and destination for a network interface. This should be reviewed by the network security team.",
-            "displayName": "Network interfaces should disable IP forwarding"
+            "description": "Bloque l'activation de l'IP forwarding sur les cartes réseau",
+            "displayName": "Bloque l'activation de l'IP forwarding sur les cartes réseau"
          },
          "nonComplianceMessage": {
              "message": "Network interfaces {enforcementMode} disable IP forwarding.",

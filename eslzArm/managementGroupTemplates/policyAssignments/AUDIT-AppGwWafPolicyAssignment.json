@@ -30,8 +30,8 @@
         },
         "policyAssignmentNames": {
             "auditWAF": "Audit-AppGW-WAF",
-            "description": "Assign the WAF should be enabled for Application Gateway audit policy.",
-            "displayName": "Web Application Firewall (WAF) should be enabled for Application Gateway"
+            "description": "Le WAF devrait être activé sur les Application Gateway",
+            "displayName": "Le WAF devrait être activé sur les Application Gateway"
         },
         "nonComplianceMessage": {
             "message": "Web Application Firewall (WAF) {enforcementMode} be enabled for Application Gateway.",

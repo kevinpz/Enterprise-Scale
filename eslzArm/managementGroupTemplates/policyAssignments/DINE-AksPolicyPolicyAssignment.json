@@ -23,8 +23,8 @@
         },
         "policyAssignmentNames": {
             "deployAks": "Deploy-AKS-Policy",
-            "description": "Use Azure Policy Add-on to manage and report on the compliance state of your Azure Kubernetes Service (AKS) clusters. For more information, see https://aka.ms/akspolicydoc.",
-            "displayName": "Deploy Azure Policy Add-on to Azure Kubernetes Service clusters"
+            "description": "Déploie l'extension de policy pour les clusters AKS",
+            "displayName": "Déploie l'extension de policy pour les clusters AKS"
         },
         "rbacAksContributor": "ed7f3fbd-7b88-4dd4-9017-9adb7ce333f8",
         "rbacAksPolicyAddon": "18ed5180-3e48-46fd-8541-4ea054d57064",

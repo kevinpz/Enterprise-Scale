@@ -27,8 +27,8 @@
         },
         "policyAssignmentNames": {
             "deploySqlEncryption": "Deploy-SQL-TDE",
-            "description": "This policy ensures that Transparent Data Encryption is enabled on SQL Servers.",
-            "displayName": "Deploy TDE on SQL servers"
+            "description": "Deploie le chiffrement transparent sur les serveurs SQL",
+            "displayName": "Deploie le chiffrement transparent sur les serveurs SQL"
         },
         "nonComplianceMessage": {
             "message": "TDE {enforcementMode} be deployed on SQL servers.",

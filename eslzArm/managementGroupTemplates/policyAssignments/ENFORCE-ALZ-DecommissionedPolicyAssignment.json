@@ -44,8 +44,8 @@
         },
         "policyAssignmentNames": {
             "alzDecommission": "Enforce-ALZ-Decomm",
-            "description": "This initiative will help enforce and govern subscriptions that are placed within the decommissioned Management Group as part of your Subscription decommissioning process. See https://aka.ms/alz/policies for more information.",
-            "displayName": "Enforce ALZ Decommissioned Guardrails"
+            "description": "Force les recommendations de sécurité pour les abonnements décommissionnés",
+            "displayName": "Force les recommendations de sécurité pour les abonnements décommissionnés"
         },
         "nonComplianceMessage": {
             "message": "ALZ Decommissioned Guardrails {enforcementMode} be enforced.",

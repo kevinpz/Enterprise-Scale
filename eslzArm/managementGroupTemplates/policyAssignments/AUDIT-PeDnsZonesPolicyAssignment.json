@@ -109,8 +109,8 @@
         },
         "policyAssignmentNames": {
             "auditPeDnsZones": "Audit-PeDnsZones",
-            "description": "Audits the deployment of Private Link Private DNS Zone resources in the Corp landing zone.",
-            "displayName": "Audit Private Link Private DNS Zone resources"
+            "description": "Audit l'utilisation des zones privées DNS pour les Private Link",
+            "displayName": "Audit l'utilisation des zones privées DNS pour les Private Link"
         },
         "nonComplianceMessage": {
             "message": "Private Link Private DNS Zone resources {enforcementMode} be deployed in the Corp landing zone.",

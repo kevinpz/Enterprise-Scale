@@ -21,8 +21,8 @@
         },
         "policyAssignmentNames": {
             "denyVMUnmanagedDisk": "Deny-UnmanagedDisk",
-            "description": "Deny virtual machines that do not use managed disk. It checks the managed disk property on virtual machine OS Disk fields.",
-            "displayName": "Deny virtual machines and virtual machine scale sets that do not use managed disk"
+            "description": "Bloque le déploiement des VM et VMSS qui n'utilisent pas les managed disks",
+            "displayName": "Bloque le déploiement des VM et VMSS qui n'utilisent pas les managed disks"
         },
         "nonComplianceMessage": {
             "message": "Virtual machines and virtual machine scales sets {enforcementMode} use a managed disk.",

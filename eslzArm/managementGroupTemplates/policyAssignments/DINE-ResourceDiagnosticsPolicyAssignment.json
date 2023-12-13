@@ -33,8 +33,10 @@
         },
         "policyAssignmentNames": {
             "resourceDiagnostics": "Deploy-Resource-Diag",
-            "description": "This policy set deploys the configurations of application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace. See the list of policies of the services that are included",
-            "displayName": "Deploy Diagnostic Settings to Azure Services"
+            //"description": "This policy set deploys the configurations of application Azure resources to forward diagnostic logs and metrics to an Azure Log Analytics workspace. See the list of policies of the services that are included",
+            "description": "Deploie les Diagnostic Settings pour les services Azure",
+            //"displayName": "Deploy Diagnostic Settings to Azure Services"
+            "displayName": "Deploie les Diagnostic Settings pour les services Azure"
         },
         "nonComplianceMessage": {
             "message": "Diagnostic settings {enforcementMode} be deployed to Azure services.",

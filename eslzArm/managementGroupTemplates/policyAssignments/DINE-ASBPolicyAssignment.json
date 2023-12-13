@@ -21,7 +21,7 @@
         },
         "policyAssignmentNames": {
             "ascMonitoring": "Deploy-ASC-Monitoring",
-            "description": "Microsoft Cloud Security Benchmark policy initiative.",
+            "description": "Microsoft Cloud Security Benchmark initiative.",
             "displayName": "Microsoft Cloud Security Benchmark"
         },
         "nonComplianceMessage": {

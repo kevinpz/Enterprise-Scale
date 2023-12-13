@@ -17,8 +17,8 @@
         },
         "policyAssignmentNames": {
             "denyHttpIngressAks": "Enforce-AKS-HTTPS",
-            "description": "Use of HTTPS ensures authentication and protects data in transit from network layer eavesdropping attacks. This capability is currently generally available for Kubernetes Service (AKS), and in preview for AKS Engine and Azure Arc enabled Kubernetes. For more info, visit https://aka.ms/kubepolicydoc",
-            "displayName": "Kubernetes clusters should be accessible only over HTTPS"
+            "description": "Les clusters Kubernetes ne doivent être accessibles qu'en HTTPS",
+            "displayName": "Les clusters Kubernetes ne doivent être accessibles qu'en HTTPS"
         }
     },
     "resources": [

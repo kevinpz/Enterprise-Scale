@@ -17,8 +17,8 @@
         },
         "policyAssignmentNames": {
             "denyAksNoPrivEsc": "Deny-Priv-Esc-AKS",
-            "description": "Do not allow containers to run with privilege escalation to root in a Kubernetes cluster. This recommendation is part of CIS 5.2.5 which is intended to improve the security of your Kubernetes environments. This policy is generally available for Kubernetes Service (AKS), and preview for AKS Engine and Azure Arc enabled Kubernetes. For more information, see https://aka.ms/kubepolicydoc.",
-            "displayName": "Kubernetes clusters should not allow container privilege escalation"
+            "description": "Les clusters Kubernetes ne doivent pas autoriser l'élévation de privilèges dans les containers",
+            "displayName": "Les clusters Kubernetes ne doivent pas autoriser l'élévation de privilèges dans les containers"
         }
     },
     "resources": [
