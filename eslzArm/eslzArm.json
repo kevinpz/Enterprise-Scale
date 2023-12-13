@@ -851,7 +851,8 @@
         },
         "delayCount": {
             "type": "int",
-            "defaultValue": 35,
+            //"defaultValue": 35,
+            "defaultValue": 2,
             "minValue": 1,
             "maxValue": 60,
             "metadata": {
@@ -2374,7 +2375,7 @@
             "apiVersion": "2020-10-01",
             "name": "[concat('preparingToLaunch', copyIndex())]",
             "location": "[deployment().location]",
-            "scope": "[concat('Microsoft.Management/managementGroups/', variables('scopes').eslzRootManagementGroup)]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', variables('mgPrefix'))]",
             "dependsOn": [
                 "[variables('deploymentNames').policyDeploymentName]"
             ],
