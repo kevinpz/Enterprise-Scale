@@ -2363,7 +2363,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     }
                 }
             }
@@ -2374,7 +2374,7 @@
             "apiVersion": "2020-10-01",
             "name": "[concat('preparingToLaunch', copyIndex())]",
             "location": "[deployment().location]",
-            "scope": "[concat('Microsoft.Management/managementGroups/', variables('scopes').eslzRootManagementGroup))]",
+            "scope": "[concat('Microsoft.Management/managementGroups/', variables('scopes').eslzRootManagementGroup)]",
             "dependsOn": [
                 "[variables('deploymentNames').policyDeploymentName]"
             ],
@@ -2418,7 +2418,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "rgName": {
                         "value": "[variables('platformRgNames').mgmtLawRg]"
@@ -2514,7 +2514,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "logAnalyticsResourceId": {
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
@@ -2545,7 +2545,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     }
                 }
             }
@@ -2569,7 +2569,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     }
                 }
             }
@@ -2597,7 +2597,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "emailContactAsc": {
                         "value": "[parameters('emailContactAsc')]"
@@ -2670,7 +2670,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableAscForOssDb'), 'DeployIfNotExists'), 'Default', 'DoNotEnforce')]"
@@ -2698,7 +2698,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableAscForSql'), 'DeployIfNotExists'), 'Default', 'DoNotEnforce')]"
@@ -2725,7 +2725,7 @@
         //         },
         //         "parameters": {
         //             "topLevelManagementGroupPrefix": {
-        //                 "value": "[variables('scopes').eslzRootManagementGroup)]"
+        //                 "value": "[variables('scopes').eslzRootManagementGroup]"
         //             },
         //             "enforcementMode": {
         //                 "value": "[if(equals(parameters('enableMDEndpoints'), 'DeployIfNotExists'), 'Default', 'DoNotEnforce')]"
@@ -2807,7 +2807,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "emailContactAsc": {
                         "value": "[parameters('emailContactAsc')]"
@@ -2896,7 +2896,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "location": {
                         "value": "[parameters('connectivityLocation')]"
@@ -2930,7 +2930,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "principalId": {
                         "value": "[if(equals(parameters('enablePrivateDnsZonesForLzs'), 'Yes'), reference(variables('deploymentNames').privateDnsPolicyDeploymentName).outputs.principalId.value, 'na')]"
@@ -2964,7 +2964,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableVmMonitoring'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -2995,7 +2995,7 @@
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableVmssMonitoring'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3022,7 +3022,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableVmBackup'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3052,7 +3052,7 @@
                         "value": "[variables('platformResourceIds').ddosProtectionResourceId]"
                     },
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableLzDdoS'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3079,7 +3079,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableaksPolicy'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3178,7 +3178,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableEncryptionInTransit'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3229,7 +3229,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('denyPublicEndpoints'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3280,7 +3280,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('denyMgmtPorts'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3331,7 +3331,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enforceKvGuardrails'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3358,7 +3358,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enforceKvGuardrailsPlat'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3409,7 +3409,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "privateLinkDnsZones": {
                         "value": "[variables('privateDnsZonesMerge')]"
@@ -3463,7 +3463,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enforceACSB'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3490,7 +3490,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('denySubnetWithoutNsg'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3519,7 +3519,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "logAnalyticsResourceId": {
                         "value": "[variables('platformResourceIds').logAnalyticsResourceId]"
@@ -3550,7 +3550,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "principalId": {
                         "value": "[if(equals(parameters('enableSqlAudit'), 'Yes'), reference(variables('deploymentNames').sqlAuditPolicyDeploymentName).outputs.principalId.value, 'na')]"
@@ -3581,7 +3581,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "principalId": {
                         "value": "[if(equals(parameters('enableSqlAudit'), 'Yes'), reference(variables('deploymentNames').sqlAuditPolicyDeploymentName).outputs.principalId.value, 'na')]"
@@ -3611,7 +3611,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableSqlEncryption'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3638,7 +3638,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableSqlThreat'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3665,7 +3665,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableDecommissioned'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3692,7 +3692,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "[if(equals(parameters('enableSandbox'), 'Yes'), 'Default', 'DoNotEnforce')]"
@@ -3778,7 +3778,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "Default"
@@ -3806,7 +3806,7 @@
                 },
                 "parameters": {
                     "topLevelManagementGroupPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "enforcementMode": {
                         "value": "Default"
@@ -3846,7 +3846,7 @@
                 },
                 "parameters": {
                     "enterpriseScaleCompanyPrefix": {
-                        "value": "[variables('scopes').eslzRootManagementGroup)]"
+                        "value": "[variables('scopes').eslzRootManagementGroup]"
                     },
                     "telemetryOptOut": {
                         "value": "[parameters('telemetryOptOut')]"
