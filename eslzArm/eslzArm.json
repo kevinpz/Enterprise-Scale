@@ -3827,7 +3827,7 @@
 
 
 // MONITORING POLICIES
-/*
+
         {
             // Deploying AMBA custom policies. Note: These policies are pulled from AMBA remote repo (https://www.github.com/Azure/azure-monitor-baseline-alerts). See definition of deploymentUris.monitorPolicyDefinitions for more details
             "condition": "[and(empty(parameters('singlePlatformSubscriptionId')), equals(parameters('enableMonitorBaselines'), 'Yes'))]",
@@ -3905,7 +3905,7 @@
                 }
             }
         },
-        */
+        
 
 
 
